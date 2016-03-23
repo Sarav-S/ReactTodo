@@ -1,0 +1,13 @@
+.icons {
+	font-size: 28px;
+    display: inline-block;
+    margin-top: -10px;
+    margin-left: 5px;
+    cursor: pointer;
+ }
+
+ #content input[type="text"].form-control {
+	box-shadow: none !important;
+    border: 1px solid #ccc !important;
+    border-radius: 2px;
+ }
