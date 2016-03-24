@@ -58,6 +58,30 @@ var CommentBox = React.createClass({
 		$('body').find('[data-toggle="tooltip"]').tooltip();
 	},
 	updateTask : function(task) {
+		
+		if (task.target == "pending") {
+			var tasks = this.state.pending;
+		    var newTasks = tasks.concat([task]);
+		    this.setState({pending: newTasks});
+		    var completed = [];
+		    for(var i = 0; i < this.state.completed.length;i++) {
+		    	if (this.state.completed[i].id != task.id) {
+		    		completed.push(this.state.completed[i])
+		    	}
+		    }
+		    this.setState({ completed : completed });
+		} else if (task.target == "completed") {
+			var tasks = this.state.completed;
+		    var newTasks = tasks.concat([task]);
+		    this.setState({completed: newTasks});
+		    var pending = [];
+		    for(var i = 0; i < this.state.pending.length;i++) {
+		    	if (this.state.pending[i].id != task.id) {
+		    		pending.push(this.state.pending[i])
+		    	}
+		    }
+		    this.setState({ pending : pending });
+		}
 		var that = this;
 		$.ajax({
 	     	url: this.props.onFormSubmitUrl + '/' + task.id,
@@ -99,12 +123,12 @@ var PendingTasks = React.createClass({
 	getInitialState : function() {
 		return { data : [] }
 	},
-	addToCompletedTask : function(id, status) {
-		this.props.updateTask({ id : id, status : status });
+	addToCompletedTask : function(id, status, title) {
+		this.props.updateTask({ id : id, status : status, target : 'completed', title : title });
 		return false;
 	},
-	addToDeletedTask : function(id, status) {
-		this.props.updateTask({ id : id, status : status });
+	addToDeletedTask : function(id, status, title) {
+		this.props.updateTask({ id : id, status : status, target : '', title : title });
 		return false;
 	},
 	onTaskFormSubmit : function(task) {
@@ -119,10 +143,10 @@ var PendingTasks = React.createClass({
 			return ( 
 				<div className="list-group-item" key={task.id}>
 					{task.title}
-					<a data-id={task.id} data-status="2" onClick={that.addToDeletedTask.bind(null, task.id, 2)} className="icons pull-right" data-toggle="tooltip" data-placement="top" title="Delete this task">
+					<a data-id={task.id} data-status="2" onClick={that.addToDeletedTask.bind(null, task.id, 2, task.title)} className="icons pull-right" data-toggle="tooltip" data-placement="top" title="Delete this task">
 						<i className="ion-ios-close-outline"></i>
 					</a>
-					<a data-id={task.id} data-status="1" onClick={that.addToCompletedTask.bind(null, task.id, 1)} className="icons pull-right" data-toggle="tooltip" data-placement="top" title="Add to completed">
+					<a data-id={task.id} data-status="1" onClick={that.addToCompletedTask.bind(null, task.id, 1, task.title)} className="icons pull-right" data-toggle="tooltip" data-placement="top" title="Add to completed">
 						<i className="ion-ios-checkmark-outline"></i>
 					</a>
 				</div>
@@ -177,12 +201,12 @@ var CompletedTasks = React.createClass({
 	getInitialState : function() {
 		return { data : [] }
 	},
-	addToPendingTask : function(id, status) {
-		this.props.updateTask({ id : id, status : status });
+	addToPendingTask : function(id, status, title) {
+		this.props.updateTask({ id : id, status : status, target : 'pending', title : title });
 		return false;
 	},
-	addToDeletedTask : function(id, status) {
-		this.props.updateTask({ id : id, status : status });
+	addToDeletedTask : function(id, status, title) {
+		this.props.updateTask({ id : id, status : status, target : '', title : title });
 		return false;
 	},
 	componentDidMount : function() {
@@ -194,10 +218,10 @@ var CompletedTasks = React.createClass({
 			return ( 
 				<div className="list-group-item" key={task.id}>
 					{task.title}
-					<a data-id={task.id} className="icons pull-right" onClick={that.addToDeletedTask.bind(null, task.id, 2)} data-toggle="tooltip" data-placement="top" title="Delete this task">
+					<a data-id={task.id} className="icons pull-right" onClick={that.addToDeletedTask.bind(null, task.id, 2,task.title)} data-toggle="tooltip" data-placement="top" title="Delete this task">
 						<i className="ion-ios-close-outline"></i>
 					</a>
-					<a data-id={task.id} className="icons pull-right" onClick={that.addToPendingTask.bind(null, task.id, 0)} data-toggle="tooltip" data-placement="top" title="Add to Pending list">
+					<a data-id={task.id} className="icons pull-right" onClick={that.addToPendingTask.bind(null, task.id, 0,task.title)} data-toggle="tooltip" data-placement="top" title="Add to Pending list">
 						<i className="ion-ios-arrow-thin-left"></i>
 					</a>
 				</div>
