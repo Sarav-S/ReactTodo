@@ -32,10 +32,10 @@ class Task extends Model {
 	}
 
 	public static function pendingTasks() {
-		return self::where('status', 0)->get();
+		return self::where('status', 0)->orderBy('updated_at', 'ASC')->get();
 	}
 
 	public static function completedTasks() {
-		return self::where('status', 1)->get();
+		return self::where('status', 1)->orderBy('updated_at', 'ASC')->get();
 	}
 }
