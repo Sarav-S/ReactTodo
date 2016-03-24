@@ -1,7 +1,7 @@
 # ReactTodo
 This is a simple todo application built on Laravel using React Js
 
-Demo URL : http://sarav.co/projects/todo/public/
+<a href="http://sarav.co/projects/todo/public/" target="_blank">Demo URL</a>
 
 ##Installation##
 
