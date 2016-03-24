@@ -59,29 +59,29 @@ var CommentBox = React.createClass({
 	},
 	updateTask : function(task) {
 		
-		if (task.target == "pending") {
-			var tasks = this.state.pending;
-		    var newTasks = tasks.concat([task]);
-		    this.setState({pending: newTasks});
-		    var completed = [];
-		    for(var i = 0; i < this.state.completed.length;i++) {
-		    	if (this.state.completed[i].id != task.id) {
-		    		completed.push(this.state.completed[i])
-		    	}
-		    }
-		    this.setState({ completed : completed });
-		} else if (task.target == "completed") {
-			var tasks = this.state.completed;
-		    var newTasks = tasks.concat([task]);
-		    this.setState({completed: newTasks});
-		    var pending = [];
-		    for(var i = 0; i < this.state.pending.length;i++) {
-		    	if (this.state.pending[i].id != task.id) {
-		    		pending.push(this.state.pending[i])
-		    	}
-		    }
-		    this.setState({ pending : pending });
-		}
+		// if (task.target == "pending") {
+		// 	var tasks = this.state.pending;
+		//     var newTasks = tasks.concat([task]);
+		//     this.setState({pending: newTasks});
+		//     var completed = [];
+		//     for(var i = 0; i < this.state.completed.length;i++) {
+		//     	if (this.state.completed[i].id != task.id) {
+		//     		completed.push(this.state.completed[i])
+		//     	}
+		//     }
+		//     this.setState({ completed : completed });
+		// } else if (task.target == "completed") {
+		// 	var tasks = this.state.completed;
+		//     var newTasks = tasks.concat([task]);
+		//     this.setState({completed: newTasks});
+		//     var pending = [];
+		//     for(var i = 0; i < this.state.pending.length;i++) {
+		//     	if (this.state.pending[i].id != task.id) {
+		//     		pending.push(this.state.pending[i])
+		//     	}
+		//     }
+		//     this.setState({ pending : pending });
+		// }
 		var that = this;
 		$.ajax({
 	     	url: this.props.onFormSubmitUrl + '/' + task.id,
