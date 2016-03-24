@@ -84,10 +84,22 @@
     <!-- JavaScripts -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script type="text/babel" src="{{ asset("js/app.js") }}"></script>
-    <script>
-        jQuery(document).ready(function($){
-
-        });
+    <!-- Piwik -->
+    <script type="text/javascript">
+      var _paq = _paq || [];
+      _paq.push(["setDomains", ["*.sarav.co/projects/todo"]]);
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//piwik.sridhar.co/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+       _paq.push(['enableHeartBeatTimer']);
+        _paq.push(['setSiteId', 16]);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+      })();
     </script>
+    <noscript><p><img src="//piwik.sridhar.co/piwik.php?idsite=16" style="border:0;" alt="" /></p></noscript>
+    <!-- End Piwik Code -->
 </body>
 </html>
